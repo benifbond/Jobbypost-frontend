@@ -1,21 +1,19 @@
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import "./Form.css";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import ThreeDRotation from '@mui/icons-material/ThreeDRotation';
-import { AvatarGroup } from '@mui/material';
+import { AvatarGroup } from "@mui/material";
 
 import { useNavigate, NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
@@ -25,14 +23,14 @@ import { BASE_API_URL } from "../utils/constants";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Rob & Ben
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      Rob & Ben {new Date().getFullYear()}
     </Typography>
   );
 }
@@ -48,7 +46,11 @@ export default function SignInSide() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const submitUser = await axios.post(`${BASE_API_URL}/auth/login`, {username, email, password});
+    const submitUser = await axios.post(`${BASE_API_URL}/auth/login`, {
+      username,
+      email,
+      password,
+    });
     console.log(submitUser.data);
     authenticateUser(submitUser.data.authToken);
     navigate("/employer/profile");
@@ -57,57 +59,46 @@ export default function SignInSide() {
   function handleChange(e) {
     if (e.target.name === "employer") {
       setUsername(e.target.value);
-    } 
-    else if (e.target.name === "password") {
+    } else if (e.target.name === "password") {
       setPassword(e.target.value);
-    } 
-    else {
+    } else {
       setEmail(e.target.value);
     }
   }
 
-
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "90vh" }}>
+      <Grid
+        className={"centerForm"}
+        sx={{
+          width: "50%",
+          height: "60%",
+
+          "&:hover": {
+            opacity: [0.6, 0.9],
+          },
+        }}
+      >
         <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
-            backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid />
+        <Grid item component={Paper} className={"Form"} elevation={24} square>
           <Box
             sx={{
-              my: 8,
-              mx: 4,
+              my: 6,
+              mx: 12,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Employer Log in
+            <Typography component="h1" variant="h4">
+              Admin Login
             </Typography>
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
+              sx={{ mt: 3 }}
             >
               <TextField
                 margin="normal"
@@ -137,6 +128,7 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
+                borderRadius="50px"
                 name="password"
                 label="Password"
                 type="password"
@@ -151,28 +143,31 @@ export default function SignInSide() {
               />
               <Button
                 type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                variant="outlined"
+                sx={{ mt: 1, mb: 1, color: "#009688", size: "large" }}
               >
                 Submit
               </Button>
-              <Grid container>
+              <Grid container sx={{ mt: 4 }}>
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link
+                    component={NavLink}
+                    to="/employer/signup"
+                    variant="body2 "
+                  >
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
+              <Copyright sx={{ mt: 2, mb: 2 }} />
               <AvatarGroup>
-                <Avatar alt="Robert" src="../images/avatar/20200922_171011.jpg" />
-                <Avatar alt="Beniah" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Robert" />
+                <Avatar alt="Beniah" />
               </AvatarGroup>
             </Box>
           </Box>
@@ -181,21 +176,3 @@ export default function SignInSide() {
     </ThemeProvider>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

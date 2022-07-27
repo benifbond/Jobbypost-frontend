@@ -4,38 +4,31 @@ import Box from "@mui/material/Box";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import HomeIcon from "@mui/icons-material/Home";
-
+import HomePage from "../components/HomePage";
 import UserAuthModal from "./modals/UserAuthModal.jsx";
 import EmployerAuthModal from "./modals/EmployerAuthModal.jsx";
+import { MenuItem } from "@mantine/core";
+import { Grid } from "@mui/material";
 
 export default function Layout({ children }) {
   const [value, setValue] = React.useState(0);
 
   return (
-    <Box
-      sx={{
-        width: "auto",
-        margin: " 20px",
-      }}
-    >
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      >
-        <BottomNavigationAction
-          label="Home"
-          component={NavLink}
-          to="/"
-          icon={<HomeIcon />}
-        />
-        <UserAuthModal />
-        <EmployerAuthModal />
-      </BottomNavigation>
+    <Grid item xs={false} sm={4} md={"center"}>
+      <Box>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <UserAuthModal />
+          <EmployerAuthModal />
+        </BottomNavigation>
 
-      {children}
-    </Box>
+        {children}
+      </Box>
+    </Grid>
   );
 }

@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 
-export default function EmployerAuthModal() {
+export default function UserAuthModal() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 

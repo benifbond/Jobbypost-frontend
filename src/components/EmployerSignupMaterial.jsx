@@ -12,11 +12,10 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import ThreeDRotation from "@mui/icons-material/ThreeDRotation";
-import { AvatarGroup } from "@mui/material";
 
-import { useNavigate } from "react-router-dom";
+import { AvatarGroup } from "@mui/material";
+import "./Form.css";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import axios from "axios";
@@ -31,9 +30,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Rob & Ben
-      </Link>{" "}
+      Rob & Ben
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -73,45 +70,37 @@ export default function SignInSide() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "90vh" }}>
+      <Grid
+        className={"centerForm"}
+        sx={{
+          width: "50%",
+          height: "60%",
+
+          "&:hover": {
+            opacity: [0.6, 0.9],
+          },
+        }}
+      >
         <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
-            backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid />
+        <Grid item component={Paper} className={"Form"} elevation={24} square>
           <Box
             sx={{
-              my: 8,
-              mx: 4,
+              my: 6,
+              mx: 12,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Employer Sign up
+            <Typography component="h1" variant="h4">
+              Admin Signup
             </Typography>
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
+              sx={{ mt: 3 }}
             >
               <TextField
                 onChange={handleChange}
@@ -154,7 +143,7 @@ export default function SignInSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 4 }}
               >
                 Submit
               </Button>
@@ -165,8 +154,12 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link
+                    component={NavLink}
+                    to="/employer/login"
+                    variant="body2"
+                  >
+                    {"Have an account? Login"}
                   </Link>
                 </Grid>
               </Grid>

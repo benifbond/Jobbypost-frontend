@@ -1,0 +1,14 @@
+body{
+    margin:0
+
+}
+
+
+.Form{
+    background-image: linear-gradient(to right top, #ede9eb, #eae6e9, #e6e2e7, #e2dfe6, #dddce4, #dadce4, #d8dde5, #d5dde4, #d5e0e5, #d7e2e6, #d8e5e6, #dbe7e6);
+    
+}
+.centerForm{
+margin: 40px auto; 
+
+}
